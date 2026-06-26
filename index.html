@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Authentication System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container" id="main-container">
+        <div class="tab-buttons" id="form-tabs">
+            <button id="btn-tab-register" class="tab-btn" onclick="switchForm('register')">REGISTER</button>
+            <button id="btn-tab-login" class="tab-btn active" onclick="switchForm('login')">LOGIN</button>
+        </div>
+
+        <div id="register-form" class="form-container">
+            <h2>CREATE YOUR ACCOUNT</h2>
+            <div class="subtitle">Join us by creating a new account</div>
+            
+            <form onsubmit="handleRegister(event)">
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" id="reg-username" required placeholder="Enter username">
+                    <div id="reg-username-error" class="error-text"></div>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="text" id="reg-email" required placeholder="Enter email">
+                    <div id="reg-email-error" class="error-text"></div>
+                </div>
+                <div class="input-group password-container">
+                    <label>Password</label>
+                    <input type="password" id="reg-password" required placeholder="Enter password">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('reg-password', this)">👁️</span>
+                </div>
+                <div class="input-group password-container">
+                    <label>Confirm Password</label>
+                    <input type="password" id="reg-confirm-password" required placeholder="Confirm your password">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('reg-confirm-password', this)">👁️</span>
+                    <div id="reg-password-error" class="error-text"></div>
+                </div>
+                <button type="submit" class="btn btn-register">REGISTER</button>
+            </form>
+            
+            <div class="form-footer">
+                Already have an account? <a onclick="switchForm('login')">Login</a>
+            </div>
+        </div>
+
+        <div id="login-form" class="form-container active">
+            <h2>WELCOME BACK</h2>
+            <div class="subtitle">Sign in to your account</div>
+            
+            <form onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label>Username or Email</label>
+                    <input type="text" id="login-id" required placeholder="Enter username or email">
+                    <div id="login-id-error" class="error-text"></div> </div>
+                <div class="input-group password-container">
+                    <label>Password</label>
+                    <input type="password" id="login-password" required placeholder="Enter password">
+                    <span class="toggle-password" onclick="togglePasswordVisibility('login-password', this)">👁️</span>
+                    <div id="login-password-error" class="error-text"></div> </div>
+                <a href="#" class="forgot-password" onclick="showForgotPassword(event)">Forgot Password?</a>
+                <button type="submit" class="btn btn-login">LOGIN</button>
+            </form>
+            
+            <div class="form-footer">
+                Need an account? <a onclick="switchForm('register')">Register</a>
+            </div>
+        </div>
+
+        <div id="forgot-password-form" class="form-container">
+            <h2>RESET PASSWORD</h2>
+            <div class="subtitle">Enter your email to receive a secure link</div>
+            
+            <form onsubmit="handleResetPassword(event)">
+                <div class="input-group">
+                    <label>Your Email Address</label>
+                    <input type="text" id="reset-email" required placeholder="name@example.com">
+                    <div id="reset-email-error" class="error-text"></div>
+                </div>
+                <button type="submit" class="btn btn-reset">SEND RESET LINK</button>
+            </form>
+            
+            <div class="form-footer">
+                Remember your password? <a onclick="hideForgotPassword()">Back to Login</a>
+            </div>
+        </div>
+
+        <div id="dashboard-view" class="form-container">
+            <h2>WELCOME, <span id="display-username">USER</span>!</h2>
+            <div class="subtitle">Accessing account resources...</div>
+            
+            <div id="dash-landing" class="dash-subview active">
+                <div class="success-box">
+                    <div class="success-icon">✓</div>
+                    <h3>Login Successful!</h3>
+                    <p>Redirecting to your application dashboard...</p>
+                </div>
+            </div>
+
+            <div id="dash-profile" class="dash-subview">
+                <div class="info-card">
+                    <h4 class="card-title">User Account Profile Details</h4>
+                    <div class="info-row"><strong>Username / Email:</strong> <span id="prof-name">N/A</span></div>
+                    <div class="info-row"><strong>Role Status:</strong> <span class="badge">Standard Member</span></div>
+                    <div class="info-row"><strong>Session Activity:</strong> <span class="text-green">Online</span></div>
+                </div>
+            </div>
+
+            <div id="dash-settings" class="dash-subview">
+                <div class="info-card">
+                    <h4 class="card-title">System & App Configurations</h4>
+                    <div class="setting-toggle">
+                        <span>Push Notification Status</span>
+                        <span class="text-green">Enabled</span>
+                    </div>
+                    <div class="setting-toggle">
+                        <span>Secure Account Mode</span>
+                        <span class="text-green">Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-footer">
+                <button id="btn-dash-profile" class="dash-btn" onclick="switchDashboardView('profile')">Profile</button>
+                <button id="btn-dash-settings" class="dash-btn" onclick="switchDashboardView('settings')">Settings</button>
+                <button class="dash-btn logout" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
